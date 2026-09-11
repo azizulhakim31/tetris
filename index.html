@@ -9,10 +9,36 @@
 
 <body>
     <div class="game">
-        <div class="left">
-            <h1>TETRIS</h1>
+        <div class="game_area">
+            <div class="title">TETRIS</div>
+
+            <div class="board">
+                <canvas id="game" width="300" height="600"></canvas>
+
+                <div class="message" id="message">
+                    <h3 class="messageText">PAUSED</h3>
+                    <button id="messageBtn">Continue</button>
+                </div>
+            </div>
         </div>
 
+        <div class="side_panel">
+
+            <div class="info">
+                <div class="label">SCORE</div>
+                <div class="value" id="score">0</div>
+            </div>
+
+            <button id="pauseBtn">Pause</button>
+            <button id="restartBtn">Restart</button>
+
+            <div class="info controls">
+                <div class="label">CONTROLS</div>
+                Move ← → <br>
+                Drop ↓ <br>
+                Pause P
+            </div>
+        </div>
 
     </div>
 
