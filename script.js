@@ -34,6 +34,7 @@ let score = 0;
 let paused = false;
 let gameOver = false;
 
+// create an empty board
 function createBoard() {
     return Array.from(
         { length: ROWS },
@@ -41,6 +42,7 @@ function createBoard() {
     );
 }
 
+// create a random piece
 function createPiece() {
     const index = Math.floor(Math.random() * pieces.length);
 
@@ -50,15 +52,48 @@ function createPiece() {
     };
 }
 
-function drawBlock(context, x, y, value, size) {
-    context.fillStyle = colors[value];
-    context.fillRect(
-        x * size + 2,
-        y * size + 2,
-        size - 4,
-        size - 4
+// draw one block
+function drawBlock(x, y, value) {
+    ctx.fillStyle = colors[value];
+    ctx.fillRect(
+        x * BLOCK_SIZE + 2,
+        y * BLOCK_SIZE + 2,
+        BLOCK_SIZE - 4,
+        BLOCK_SIZE - 4
     );
+}
+
+function drawGame() {
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    // fixed blocks
+    board.forEach((row, y) => {
+        row.forEach((value, x) => {
+            if (value) {
+                drawBlock(x, y, value);
+            }
+        });
+    });
+
+    // falling piece
+    piece.matrix.forEach((row, y) => {
+        row.forEach((value, x) => {
+            if (value) {
+                drawBlock(
+                    piece.x + x,
+                    piece.y + y,
+                    value
+                );
+            }
+        });
+    });
 }
 
 createBoard();
 createPiece();
+drawGame();
