@@ -63,6 +63,7 @@ function drawBlock(x, y, value) {
     );
 }
 
+// draw board and current piece
 function drawGame() {
     ctx.clearRect(
         0,
@@ -92,6 +93,32 @@ function drawGame() {
             }
         });
     });
+}
+
+// check collision
+function isCollision() {
+    for (let y = 0; y < piece.matrix.length; y++) {
+        for (let x = 0; x < piece.matrix[y].length; x++) {
+
+            if (!piece.matrix[y][x]) {
+                continue;
+            }
+
+            const boardX = piece.x + x;
+            const boardY = piece.y + y;
+
+            // check walls and floor
+            if (boardX < 0 || boardX >= COLUMNS || boardY >= ROWS) {
+                return true;
+            }
+
+            // check existing blocks
+            if (boardY >= 0 && board[boardY][boardX]) {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 createBoard();
