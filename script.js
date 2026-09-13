@@ -27,7 +27,7 @@ const pieces = [
 ];
 
 let board;
-let piece;
+let currentPiece;
 
 let score = 0;
 
@@ -82,12 +82,12 @@ function drawGame() {
     });
 
     // falling piece
-    piece.matrix.forEach((row, y) => {
+    currentPiece.matrix.forEach((row, y) => {
         row.forEach((value, x) => {
             if (value) {
                 drawBlock(
-                    piece.x + x,
-                    piece.y + y,
+                    currentPiece.x + x,
+                    currentPiece.y + y,
                     value
                 );
             }
@@ -97,15 +97,15 @@ function drawGame() {
 
 // check collision
 function isCollision() {
-    for (let y = 0; y < piece.matrix.length; y++) {
-        for (let x = 0; x < piece.matrix[y].length; x++) {
+    for (let y = 0; y < currentPiece.matrix.length; y++) {
+        for (let x = 0; x < currentPiece.matrix[y].length; x++) {
 
             if (!piece.matrix[y][x]) {
                 continue;
             }
 
-            const boardX = piece.x + x;
-            const boardY = piece.y + y;
+            const boardX = currentPiece.x + x;
+            const boardY = currentPiece.y + y;
 
             // check walls and floor
             if (boardX < 0 || boardX >= COLUMNS || boardY >= ROWS) {
@@ -123,11 +123,11 @@ function isCollision() {
 
 // add piece to the board
 function mergePiece() {
-    piece.matrix.forEach((row, y) => {
+    currentPiece.matrix.forEach((row, y) => {
         row.forEach((value, x) => {
 
             if (value) {
-                board[piece.y + y][piece.x + x] = value
+                board[currentPiece.y + y][currentPiece.x + x] = value
             }
         });
     });
@@ -139,7 +139,7 @@ function clearLines() {
 
     for (let y = ROWS - 1; y >= 0; y--) {
 
-        if (board[y].every(cell => cell !==0)) {
+        if (board[y].every(cell => cell !== 0)) {
             board.splice(Array(COLUMNS).fill(0));
 
             count++;
@@ -158,7 +158,16 @@ function clearLines() {
         level = Math.floor(lines / 10) + 1;
 
         document.getElementById("score").textContent =
-        score.toLocaleString();
+            score.toLocaleString();
+    }
+}
+
+// new falling piece
+function newFallingPiece() {
+    currentPiece = createPiece();
+
+    if (isCollision()) {
+        gameOver = true;
     }
 }
 
