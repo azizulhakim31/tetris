@@ -194,6 +194,19 @@ function dropPiece() {
     dropTimer = 0;
 }
 
+// move left right
+function movePiece(direction) {
+    if (paused || gameOver) {
+        return;
+    }
+
+    currentPiece.x += direction;
+
+    if (isCollision()) {
+        currentPiece.x -= direction;
+    }
+}
+
 board = createBoard();
 currentPiece = createPiece();
 drawGame();
