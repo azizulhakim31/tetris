@@ -30,9 +30,13 @@ let board;
 let currentPiece;
 
 let score = 0;
+let level = 1;
+let lines = 0;
 
 let paused = false;
 let gameOver = false;
+
+let dropTimer = 0;
 
 // create an empty board
 function createBoard() {
@@ -100,7 +104,7 @@ function isCollision() {
     for (let y = 0; y < currentPiece.matrix.length; y++) {
         for (let x = 0; x < currentPiece.matrix[y].length; x++) {
 
-            if (!piece.matrix[y][x]) {
+            if (!currentPiece.matrix[y][x]) {
                 continue;
             }
 
@@ -140,7 +144,8 @@ function clearLines() {
     for (let y = ROWS - 1; y >= 0; y--) {
 
         if (board[y].every(cell => cell !== 0)) {
-            board.splice(Array(COLUMNS).fill(0));
+            board.splice(y, 1);
+            board.unshift(Array(COLUMNS).fill(0));
 
             count++;
             y++;
@@ -171,7 +176,26 @@ function newFallingPiece() {
     }
 }
 
-createBoard();
-createPiece();
+// piece down
+function dropPiece() {
+    if (paused || gameOver) {
+        return;
+    }
+
+    currentPiece.y++;
+
+    if (isCollision()) {
+        currentPiece.y--;
+
+        mergePiece();
+        clearLines();
+        newFallingPiece();
+    }
+    dropTimer = 0;
+}
+
+board = createBoard();
+currentPiece = createPiece();
 drawGame();
 clearLines();
+dropPiece();
