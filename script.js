@@ -133,6 +133,36 @@ function mergePiece() {
     });
 }
 
+// remove completed lines
+function clearLines() {
+    let count = 0;
+
+    for (let y = ROWS - 1; y >= 0; y--) {
+
+        if (board[y].every(cell => cell !==0)) {
+            board.splice(Array(COLUMNS).fill(0));
+
+            count++;
+            y++;
+        }
+    }
+
+    if (count > 0) {
+
+        // line score
+        const points = [0, 100, 300, 500, 800];
+
+        score += points[count] * level;
+        lines += count;
+
+        level = Math.floor(lines / 10) + 1;
+
+        document.getElementById("score").textContent =
+        score.toLocaleString();
+    }
+}
+
 createBoard();
 createPiece();
 drawGame();
+clearLines();
