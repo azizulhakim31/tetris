@@ -121,6 +121,18 @@ function isCollision() {
     return false;
 }
 
+// add piece to the board
+function mergePiece() {
+    piece.matrix.forEach((row, y) => {
+        row.forEach((value, x) => {
+
+            if (value) {
+                board[piece.y + y][piece.x + x] = value
+            }
+        });
+    });
+}
+
 createBoard();
 createPiece();
 drawGame();
