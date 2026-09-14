@@ -1,8 +1,10 @@
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
-let message = document.getElementById("message");
-let messageText = document.getElementById("messageText");
+const message = document.getElementById("message");
+const messageText = document.getElementById("messageText");
+const pauseButton = document.getElementById("pauseBtn");
+const restartButton = document.getElementById("restartBtn");
 
 const COLUMNS = 10;
 const ROWS = 20;
@@ -227,6 +229,23 @@ function hideMessage() {
     message.classList.remove("show");
 }
 
+// pause or resume game
+function togglePause() {
+    if (gameOver) {
+        return;
+    }
+
+    paused = !paused;
+
+    if (paused) {
+        showMessage("PAUSED");
+        pauseButton.textContent = "Resume";
+    } else {
+        hideMessage();
+        pauseButton.textContent = "Pause";
+    }
+}
+
 document.addEventListener("keydown", event => {
 
     if (event.key === "ArrowLeft") {
@@ -240,6 +259,9 @@ document.addEventListener("keydown", event => {
     else if (event.key === "ArrowDown") {
         event.preventDefault();
         dropPiece();
+    }
+    else if (event.key.toLocaleLowerCase() === "p") {
+        togglePause();
     }
     drawGame();
 });
