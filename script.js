@@ -207,8 +207,24 @@ function movePiece(direction) {
     }
 }
 
+document.addEventListener("keydown", event => {
+
+    if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        movePiece(-1);
+    }
+    else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        movePiece(1);
+    }
+    else if (event.key === "ArrowDown") {
+        event.preventDefault();
+        dropPiece();
+    }
+    drawGame();
+});
+
 board = createBoard();
 currentPiece = createPiece();
 drawGame();
 clearLines();
-dropPiece();
