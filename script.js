@@ -1,6 +1,9 @@
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
+let message = document.getElementById("message");
+let messageText = document.getElementById("messageText");
+
 const COLUMNS = 10;
 const ROWS = 20;
 const BLOCK_SIZE = 30;
@@ -211,6 +214,17 @@ function updateUI() {
     document.getElementById("score").textContent = score.toLocaleString();
 
     document.getElementById("level").textContent = level;
+}
+
+// show message
+function showMessage(text) {
+    messageText.textContent = text;
+    message.classList.add("show");
+}
+
+// hide message
+function hideMessage() {
+    message.classList.remove("show");
 }
 
 document.addEventListener("keydown", event => {
