@@ -162,8 +162,7 @@ function clearLines() {
 
         level = Math.floor(lines / 10) + 1;
 
-        document.getElementById("score").textContent =
-            score.toLocaleString();
+        updateUI();
     }
 }
 
@@ -205,6 +204,13 @@ function movePiece(direction) {
     if (isCollision()) {
         currentPiece.x -= direction;
     }
+}
+
+// update score & level
+function updateUI() {
+    document.getElementById("score").textContent = score.toLocaleString();
+
+    document.getElementById("level").textContent = level;
 }
 
 document.addEventListener("keydown", event => {
