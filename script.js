@@ -277,7 +277,7 @@ function restartGame() {
 
     pauseButton.textContent = "Pause";
     messageButton.textContent = "Continue";
-    messageButton.onclick = togglePause();
+    messageButton.onclick = togglePause;
 }
 
 // main game loop
@@ -300,6 +300,7 @@ function gameLoop(time = 0) {
     requestAnimationFrame(gameLoop);
 }
 
+// keyboard controls
 document.addEventListener("keydown", event => {
 
     if (event.key === "ArrowLeft") {
@@ -319,6 +320,11 @@ document.addEventListener("keydown", event => {
     }
     drawGame();
 });
+
+// button controls
+pauseButton.addEventListener("click", togglePause);
+restartButton.addEventListener("click", restartGame);
+messageButton.addEventListener("click", togglePause);
 
 board = createBoard();
 currentPiece = createPiece();
