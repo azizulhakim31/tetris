@@ -216,6 +216,22 @@ function movePiece(direction) {
     }
 }
 
+// rotate the current piece
+function rotatePiece() {
+    if (paused || gameOver) {
+        return;
+    }
+
+    const oldMatrix = currentPiece.matrix;
+
+    // rotate matrix clockwise
+    currentPiece.matrix = currentPiece.matrix[0].map(
+        (_, index) => currentPiece.matrix
+            .map(row => row[index])
+            .reverse()
+    );
+}
+
 // update score & level
 function updateUI() {
     gameScore.textContent = score.toLocaleString();
@@ -317,6 +333,10 @@ document.addEventListener("keydown", event => {
     else if (event.key === "ArrowDown") {
         event.preventDefault();
         dropPiece();
+    }
+    else if (event.key === "ArrowUp") {
+        event.preventDefault();
+        rotatePiece();
     }
     else if (event.key.toLocaleLowerCase() === "p") {
         togglePause();
