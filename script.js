@@ -5,6 +5,7 @@ const message = document.getElementById("message");
 const messageText = document.getElementById("messageText");
 const pauseButton = document.getElementById("pauseBtn");
 const restartButton = document.getElementById("restartBtn");
+const messageButton = document.getElementById("messageBtn");
 
 const COLUMNS = 10;
 const ROWS = 20;
@@ -176,7 +177,7 @@ function newFallingPiece() {
     currentPiece = createPiece();
 
     if (isCollision()) {
-        gameOver = true;
+        endGame()
     }
 }
 
@@ -246,6 +247,38 @@ function togglePause() {
     }
 }
 
+// end game
+function endGame() {
+    gameOver = true
+
+    showMessage("GAME OVER");
+
+    messageButton.textContent = "Restart";
+    messageButton.onclick = restartGame();
+}
+
+// start a new game
+function restartGame() {
+    board = createBoard();
+
+    score = 0;
+    level = 1;
+    lines = 0;
+
+    paused = false;
+    gameOver = false;
+
+    dropTimer = 0;
+
+    newFallingPiece();
+    updateUI();
+    hideMessage();
+
+    pauseButton.textContent = "Pause";
+    messageButton.textContent = "Continue";
+    messageButton.onclick = togglePause();
+}
+
 document.addEventListener("keydown", event => {
 
     if (event.key === "ArrowLeft") {
@@ -270,3 +303,4 @@ board = createBoard();
 currentPiece = createPiece();
 drawGame();
 clearLines();
+restartGame();
