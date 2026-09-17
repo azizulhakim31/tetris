@@ -204,6 +204,24 @@ function dropPiece() {
     dropTimer = 0;
 }
 
+// hard drop
+function hardDrop() {
+    if (paused || gameOver) {
+        return;
+    }
+
+    while (!isCollision()) {
+        currentPiece.y++;
+    }
+
+    currentPiece.y--;
+
+    mergePiece();
+    clearLines();
+    newFallingPiece();
+    dropTimer = 0;
+}
+
 // move left right
 function movePiece(direction) {
     if (paused || gameOver) {
@@ -345,6 +363,10 @@ document.addEventListener("keydown", event => {
     else if (event.key === "ArrowUp") {
         event.preventDefault();
         rotatePiece();
+    }
+    else if (event.code === "Space") {
+        event.preventDefault();
+        hardDrop();
     }
     else if (event.key.toLocaleLowerCase() === "p") {
         togglePause();
