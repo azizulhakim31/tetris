@@ -42,6 +42,7 @@ let lines = 0;
 let paused = false;
 let gameOver = false;
 
+let lastTime = 0;
 let dropTimer = 0;
 
 // create an empty board
@@ -254,7 +255,7 @@ function endGame() {
     showMessage("GAME OVER");
 
     messageButton.textContent = "Restart";
-    messageButton.onclick = restartGame();
+    messageButton.onclick = restartGame;
 }
 
 // start a new game
@@ -277,6 +278,26 @@ function restartGame() {
     pauseButton.textContent = "Pause";
     messageButton.textContent = "Continue";
     messageButton.onclick = togglePause();
+}
+
+// main game loop
+function gameLoop(time = 0) {
+    const deltaTime = time - lastTime;
+
+    lastTime = time;
+
+    if (!paused && !gameOver) {
+        dropTimer += deltaTime;
+
+        // higher level=faster falling
+        const speed = Math.max(80, 700 - (level - 1) * 60);
+
+        if (dropTimer > speed) {
+            dropPiece();
+        }
+        drawGame();
+    }
+    requestAnimationFrame(gameLoop);
 }
 
 document.addEventListener("keydown", event => {
@@ -304,3 +325,4 @@ currentPiece = createPiece();
 drawGame();
 clearLines();
 restartGame();
+gameLoop();
