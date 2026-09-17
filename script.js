@@ -3,6 +3,7 @@ const ctx = canvas.getContext("2d");
 
 const gameScore = document.getElementById("score");
 const gameLevel = document.getElementById("level");
+const gameLines = document.getElementById("lines");
 
 const message = document.getElementById("message");
 const messageText = document.getElementById("messageText");
@@ -242,6 +243,8 @@ function updateUI() {
     gameScore.textContent = score.toLocaleString();
 
     gameLevel.textContent = level;
+
+    gameLines.textContent = lines;
 }
 
 // show message
