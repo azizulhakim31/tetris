@@ -230,6 +230,11 @@ function rotatePiece() {
             .map(row => row[index])
             .reverse()
     );
+
+    // undo rotation if it causes collision
+    if (isCollision()) {
+        currentPiece.matrix = oldMatrix;
+    }
 }
 
 // update score & level
