@@ -1,6 +1,9 @@
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
+const gameScore = document.getElementById("score");
+const gameLevel = document.getElementById("level");
+
 const message = document.getElementById("message");
 const messageText = document.getElementById("messageText");
 const pauseButton = document.getElementById("pauseBtn");
@@ -215,9 +218,9 @@ function movePiece(direction) {
 
 // update score & level
 function updateUI() {
-    document.getElementById("score").textContent = score.toLocaleString();
+    gameScore.textContent = score.toLocaleString();
 
-    document.getElementById("level").textContent = level;
+    gameLevel.textContent = level;
 }
 
 // show message
