@@ -293,6 +293,18 @@ function togglePause() {
     }
 }
 
+// continue paused game
+function continueGame() {
+    if (gameOver) {
+        return;
+    }
+
+    paused = false;
+
+    hideMessage();
+    pauseButton.textContent = "Pause";
+}
+
 // end game
 function endGame() {
     gameOver = true
@@ -322,7 +334,7 @@ function restartGame() {
 
     pauseButton.textContent = "Pause";
     messageButton.textContent = "Continue";
-    messageButton.onclick = togglePause;
+    messageButton.onclick = continueGame;
 }
 
 // main game loop
@@ -377,11 +389,7 @@ document.addEventListener("keydown", event => {
 // button controls
 pauseButton.addEventListener("click", togglePause);
 restartButton.addEventListener("click", restartGame);
-messageButton.addEventListener("click", togglePause);
+messageButton.addEventListener("click", continueGame);
 
-board = createBoard();
-currentPiece = createPiece();
-drawGame();
-clearLines();
 restartGame();
 gameLoop();
