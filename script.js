@@ -199,9 +199,14 @@ function clearLines() {
     }
 }
 
-// new falling piece
+// seeding current piece & prepare the next one
 function newFallingPiece() {
-    currentPiece = createPiece();
+    currentPiece = nextPiece;
+
+    currentPiece.x = 4;
+    currentPiece.y = 0;
+
+    nextPiece = createPiece();
 
     if (isCollision()) {
         endGame()
