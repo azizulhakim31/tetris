@@ -87,6 +87,10 @@ body {
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
 }
 
+.info:nth-child(3) .label {
+    margin-bottom: -10px;
+}
+
 .label {
     font-size: 15px;
     color: rgba(121, 201, 209, 1);
@@ -133,8 +137,8 @@ body {
 
 button {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 6px;
+    padding: 12px;
+    margin-bottom: 8px;
     border: none;
     border-radius: 8px;
     background: rgba(242, 107, 79, 1);

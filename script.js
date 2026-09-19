@@ -113,7 +113,7 @@ function drawGame() {
 function drawNextPiece() {
     nextCtx.clearRect(0, 0, nextCanvas.width, nextCanvas.height);
 
-    const size = 20;
+    const size = 28;
 
     nextPiece.matrix.forEach((row, y) => {
         row.forEach((value, x) => {
@@ -207,6 +207,7 @@ function newFallingPiece() {
     currentPiece.y = 0;
 
     nextPiece = createPiece();
+    drawNextPiece();
 
     if (isCollision()) {
         endGame()
@@ -355,7 +356,9 @@ function restartGame() {
 
     dropTimer = 0;
 
+    nextPiece = createPiece();
     newFallingPiece();
+
     updateUI();
     hideMessage();
 
