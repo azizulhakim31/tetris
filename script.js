@@ -1,6 +1,9 @@
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
+const nextCanvas = document.getElementById("next");
+const nextCtx = nextCanvas.getContext("2d");
+
 const gameScore = document.getElementById("score");
 const gameLevel = document.getElementById("level");
 const gameLines = document.getElementById("lines");
@@ -38,6 +41,7 @@ const pieces = [
 
 let board;
 let currentPiece;
+let nextPiece;
 
 let score = 0;
 let level = 1;
@@ -80,12 +84,7 @@ function drawBlock(x, y, value) {
 
 // draw board and current piece
 function drawGame() {
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // fixed blocks
     board.forEach((row, y) => {
@@ -108,6 +107,29 @@ function drawGame() {
             }
         });
     });
+}
+
+// show the next piece
+function drawNextPiece() {
+    nextCtx.clearRect(0, 0, nextCanvas.width, nextCanvas.height);
+
+    const size = 20;
+
+    nextPiece.matrix.forEach((row, y) => {
+        row.forEach((value, x) => {
+            if (value) {
+                nextCtx.fillStyle = colors[value];
+
+                nextCtx.fillRect(
+                    (x + 1) * size + 2,
+                    (y + 1) * size + 2,
+                    size - 4,
+                    size - 4
+                );
+            }
+        });
+    });
+
 }
 
 // check collision
