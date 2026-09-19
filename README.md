@@ -4,7 +4,7 @@ A browser-based Tetris game built with HTML, CSS, and vanilla JavaScript.
 
 ## Live Demo
 
-[Play Tetris](https://your-username.github.io/tetris/)
+[Play Tetris](https://tetris-eight-zeta.vercel.app/)
 
 ## Features
 
@@ -42,6 +42,7 @@ You can also use the on-screen **Pause** and **Restart** buttons.
 - `style.css` - Game layout and styling
 - `script.js` - Game logic and controls
 - `LICENSE` - MIT license
+- `README` - Project documentation
 
 ## License
 
